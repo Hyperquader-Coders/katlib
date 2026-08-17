@@ -1,0 +1,13 @@
+# Odin build / test outputs
+*.bin
+*.o
+*.obj
+*.exe
+
+# Agent files are local and are not shared.
+.claude/
+.mcp.json
+
+# Claude config dirs, if a session ever materialises one here.
+.claude-amber/
+.credentials.json

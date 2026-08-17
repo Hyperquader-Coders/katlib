@@ -1,0 +1,29 @@
+# Type-check and test every package. Needs only a compiler: every target is
+# -collection:kat=.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  ci:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      # Empty version follows amber-odin's monthly release; pin it for a
+      # reproducible build.
+      - uses: Hyperquader-Coders/setup-amber-odin@v1
+        id: odin
+
+      - name: Report the toolchain
+        run: echo "::notice::${{ steps.odin.outputs.odin-version }}"
+
+      - name: odin check
+        run: make check
+
+      - name: odin test
+        run: make test
